@@ -1,0 +1,79 @@
+Complete API Documentation for Unity Team
+Share this with your Unity developers:
+Base URL: http://127.0.0.1:8000
+
+
+Authentication APIs:
+POST /api/auth/register/
+POST /api/auth/login/
+GET  /api/auth/profile/
+
+
+Student APIs:
+POST /api/student/profile/create/
+GET  /api/student/profile/
+GET  /api/student/subjects/available/
+POST /api/student/subjects/enroll/
+GET  /api/student/subjects/enrolled/
+
+
+Academic APIs:
+GET /api/academics/subjects/
+GET /api/academics/subjects/{id}/
+GET /api/academics/subjects/{id}/topics/
+GET /api/academics/topics/{id}/
+GET /api/academics/topics/{id}/concepts/
+
+
+Game APIs (Most Important for Unity):
+POST /api/game/start-session/      - Start game, get questions
+POST /api/game/submit-answer/      - Submit answer, check correctness
+POST /api/game/end-session/        - End game, get final score
+GET  /api/game/session/{id}/       - Get session details
+GET  /api/game/scores/             - Get all scores for student
+GET  /api/game/progress/           - Get overall progress stats
+
+🎮 Unity Integration Flow
+Here's how Unity should use your APIs:
+1. Player opens game
+   ↓
+2. Unity calls: POST /api/auth/login/
+   → Gets JWT token
+   ↓
+3. Unity calls: POST /api/game/start-session/
+   → Gets session_id and questions
+   ↓
+4. Player plays game and answers questions
+   ↓
+5. Unity calls: POST /api/game/submit-answer/ (for each answer)
+   → Gets immediate feedback (correct/incorrect)
+   ↓
+6. Player finishes game
+   ↓
+7. Unity calls: POST /api/game/end-session/
+   → Gets final score and percentage
+   ↓
+8. Unity calls: GET /api/game/progress/
+   → Shows overall progress to player
+
+Quick Reference: Testing Commands
+For future testing, here's a quick reference:
+bash# Start server
+python manage.py runserver
+
+# Create new migrations (after model changes)
+python manage.py makemigrations
+
+# Apply migrations
+python manage.py migrate
+
+# Access admin panel
+http://127.0.0.1:8000/admin/
+
+# Django shell (for debugging)
+python manage.py shell
+
+
+
+EMAIL : 
+PASSWORD : amu12arya34
